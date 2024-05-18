@@ -1,0 +1,76 @@
+{% load static %}
+{% include 'menuretailer.html' %}
+ 
+<!doctype html> 
+<html class="no-js" lang=""> 
+ <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>E-Market | PROFILE</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+    <link rel="apple-touch-icon" href="{% static 'apple-icon.png' %}">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/flag-icon.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/cs-skin-elastic.css' %}">
+     <link rel="stylesheet" href="{% static 'assets/scss/style.css' %}">
+    <link href="{% static 'assets/css/lib/vector-map/jqvmap.min.css' %}" rel="stylesheet">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>    
+<body>
+{% include 'headerretailer.html' %}
+<br>
+    <div class="container mt-5">
+        {% for distributor in distributors %}
+        <a href="/retailer/allproducts/{{distributor.id}}/"><button type="button" name="Buy" class="btn btn-danger rounded">Buy</button><br><br></a>
+        {% endfor %}
+    </div>
+<div class="card shadow rounded"><br><h5 style="margin-left: 50px;">Products of {{owner}}</h5><hr>
+<div class="container ">
+    <table class="table table-bordered mt-2" style="width:600px;margin-left: 200px;">
+    <thead>
+      <tr style="background-color: lightcyan;">
+        <th style="width:100px">Product</th>
+        <th style="width:120px">Ordered Quantity</th>
+        <th style="width:100px">Price</th>
+        <th style="width:100px">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.name }}</td>
+            <td> {{ product.boughtquantity }}</td>
+            <td>{{product.price}}</td>  
+            <td><a href="/retailer/deleteproduct/{{product.id}}/"><button type="button" name="Edit" class="btn btn-sm btn-danger rounded">Delete</button></a></td>
+        </tr>  
+               
+        {% empty %}
+        <p class="container">No products available</p>
+        {% endfor %}
+    </tbody>
+    </table><hr>
+    <div>
+        <a href="/retailer/myorder/"><button type="button" name="order" class="btn btn-success rounded" style="margin-left: 1000px;">Order</button><br><br></a>
+    </div>
+    </div>
+    </div>
+</div>
+<br><br>
+{% include 'footerretailer.html' %}
+
+  
+
+

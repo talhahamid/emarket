@@ -1,0 +1,30 @@
+<head>
+<style>
+        @media only screen and (max-width: 600px) {
+                
+                .header{
+                        height: 40px;
+                        top:0; 
+                        z-index:1;
+                        
+                }
+        }
+        @media only screen and (min-width: 1024px) {
+                
+                .header{
+                        margin-left: 5px;
+                        width:1050px;
+                        position:fixed;
+                        top:0;
+                        height: 40px; 
+                        z-index:1;
+                }
+        }
+</style>        
+</head>
+
+    <div class="right-panel">
+        <header class="header">
+            <p style="text-align:right;margin-top: -10px;"><b>{{user_name}}</b><p>
+        </header>     
+    </div> 

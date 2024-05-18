@@ -1,0 +1,187 @@
+{% load static %}
+{% include 'menuretailer.html' %}
+ 
+<!doctype html> 
+<html class="no-js" lang=""> 
+ <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>E-Market | PROFILE</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+    <link rel="apple-touch-icon" href="{% static 'apple-icon.png' %}">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/flag-icon.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/cs-skin-elastic.css' %}">
+     <link rel="stylesheet" href="{% static 'assets/scss/style.css' %}">
+    <link href="{% static 'assets/css/lib/vector-map/jqvmap.min.css' %}" rel="stylesheet">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+<script>  
+    $(document).ready(function(){  
+        $("#changepasswordform").validate({
+            rules: {
+                current_password: {
+                    required: true,
+                    //minlength: 6
+                },
+                new_password: {
+                    required: true,
+                    minlength: 6
+                },
+                confirm_new_password: {
+                    required: true,
+                    minlength: 6,
+                    //equalTo: "#new_password"
+                }
+            },
+            messages: {
+                current_password: {
+                    required: "specify current password",
+                    minlength: "minimum length must be 6 character"
+                },
+                new_password: {
+                    required: "specify new password",
+                    minlength: "minimum length must be 6 character"
+                },
+                confirm_new_password: {
+                    required: "specify confirm password",
+                    minlength: "minimum length must be 6 character",
+                    equalTo: "new password and confirm password must be same "
+                }
+            }  
+        });
+    }); 
+</script>
+
+</head>    
+<body>
+{% include 'headerretailer.html' %}
+<div class="container mt-5">
+	<div class="card shadow">
+		<div class="card-body">
+			<div class="row">
+				<div class="col-md-4">
+					<!-- Profile Picture -->
+          <div id="profile-pic-container" style="cursor: pointer;">
+            {% if not profilepic %}
+            <img id="profile-pic" src="{% static 'images/profile-picture.webp' %}" style="width: 400px;height: 300px;" alt="User Profile Picture">
+            {% else %}
+              <img src="/media/{{ profilepic.profilepic }}" style="width: 300px; height: 250px;">
+            {% endif %}
+          </div>    
+        </div>
+				<div class="col-md-8">
+
+					<!-- User Information -->
+					<h2 class="mb-3">{{profile.name}}</h2>
+					<p>Email: {{profile.email}}</p>
+					<p>Location: {{profile.address}}</p>
+					<p>City: {{profile.city}}</p>
+					<p>State: {{profile.state}}</p>
+					
+					<!-- Edit Profile Button -->
+					<a href="/retailer/editprofile/{{profile.id}}/" class="btn btn-primary">Edit Profile</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<br><br>
+
+<!-- <div class="subs bg-white shadow-lg card container" >
+    <h4 class="text-center p-2">Your Subscription Plan Details</h4>
+    <hr>
+    <div class="plan-details">
+        <table >
+            <tr>
+                <th style="text-align:ceter;">Plan Name</th>
+                <th style="text-align:ceter;">Price</th>
+                <th style="text-align:ceter;">Expiration Date</th>
+            </tr>
+            
+            <tr>
+                <td style="text-align:ceter;">{{ subscription.planname }}</td>
+                <td style="text-align:ceter;">${{ subscription.amount }}</td>
+                <td style="text-align:ceter;">{{ subscription.expiry_date }}</td>
+            </tr>
+        </table>
+    </div>
+</div> -->
+
+
+<br>
+
+<div class="change sufee-login d-flex align-content-center flex-wrap" >
+<div class=" container">
+	<div class="bg-white shadow-lg card login-form"  style="width: 350px;height: 400px;margin-left: 325px;">
+
+	<h4>Change Password</h4>
+	<form method="post" id="changepasswordform" action="/investor/changepassword/" style="margin-top:-30px;height: 250px;">
+            {% csrf_token %}
+            <label style="font-size: 12px;">Current Password</label>
+			<input name="current_password" type="password" class="form-control" style="width: 300px;height: 30px;">
+			<label style="font-size: 12px;">New Password</label>
+			<input style="width:300px;height: 30px;" name="new_password" type="password" class="form-control">
+			<label style="font-size: 12px;">Confirm Password</label>
+			<input style="width:300px;height: 30px;" name="confirm_new_password" type="password" class="form-control">
+			<br>
+		<button style="font-size: 12px; width:300px;height: 40px;" class="form-control btn btn-primary">Submit</button><br>
+	{% if messages %}
+        <!-- <div style="color: green; font-size: 12px; margin-top: 10px;">{{ messages }}</div> -->
+    {% endif %}
+    </form>
+
+	</div>
+</div>
+</div>
+
+<hr><br>
+
+<div id="profile-upload-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="image-upload-modal-label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="image-upload-modal-label">Upload Profile Picture</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="/investor/profilepic/" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+              <input type="file" name="profilepic" accept="image/*" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Upload Profile Picture</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<script>
+    document.getElementById('profile-pic-container').addEventListener('click', function() {
+      $('#profile-upload-modal').modal('show');
+    });
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.bundle.min.js"></script>
+
+{% include 'footerretailer.html' %}
+
+  
+
+

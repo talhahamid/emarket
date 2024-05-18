@@ -1,0 +1,109 @@
+{% load static %}
+
+<!doctype html> 
+<html class="no-js" lang=""> 
+<head>
+       <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>E-Market | Product Details </title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+    <link rel="apple-touch-icon" href="{% static 'apple-icon.png' %}">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/flag-icon.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/cs-skin-elastic.css' %}">
+     <link rel="stylesheet" href="{% static 'assets/scss/style.css' %}">
+    <link href="{% static 'assets/css/lib/vector-map/jqvmap.min.css' %}" rel="stylesheet">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+<body>
+    {% include 'menu.html' %}
+    {% include 'header.html' %}
+    
+    <div class="container mt-5">
+        <div class="card shadow">
+            <div class="card-body">
+                <h4 class="card-title mb-4">Product Details</h4>
+                <form method="post" enctype="multipart/form-data" action="/retailer/boughtproducts/{{product.user.name}}/{{product.id}}/">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="product_name">Product Name</label>
+                                <input type="text" class="form-control" id="name" name="name" value="{{product.name}}"readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="product_name">Product Company</label>
+                                <input type="text" class="form-control" id="product_company" name="company" value="{{product.company}}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="product_type">Product Type</label>
+                                <input type="text" class="form-control" id="product_type" name="type" value="{{product.type}}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="price">Price</label>
+                                <input type="text" class="form-control" id="price" name="price" value="{{product.price}}" readonly>
+                            </div>
+                    <div class="form-group">
+                        <label for="quantity">Quantity</label>
+                        <input type="text" class="form-control" id="quantity" name="quantity" value="{{product.quantity}}" readonly>
+                    </div>
+                            <!-- Add more fields as needed -->
+                        </div>
+                        <div class="col-md-6">
+                           
+                            <div class="form-group">
+                                <table>
+                                    <tr>
+                                        <td><img src="/media/{{ product.image1 }}" class="card-img-top" style="width: 200px;height: 150px;" alt="{{ product.name }}"></td>
+                                    </tr>
+                                    <tr>    
+                                        <td><img src="/media/{{ product.image2 }}" class="card-img-top" style="width: 200px;height: 150px;" alt="{{ product.name }}"></td>
+                                    </tr>
+                                    <tr>    
+                                        <td><img src="/media/{{ product.image3 }}" class="card-img-top" style="width: 200px;height: 150px;" alt="{{ product.name }}"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div><hr>
+                    <div class="form-group">
+                        <p>Your Requirements</p>
+                    </div>
+                    
+                    <label for="quantity">Quantity</label>
+                    <input type="text" class="form-control" id="quantity" name="boughtquantity"><br>
+                    <button type="submit" class="btn btn-primary">Buy</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br><br><br>
+    {% include 'footer.html' %}
+    <!-- JavaScript links -->
+    <script>
+        function previewImage(event, previewId) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                var preview = document.getElementById(previewId);
+                preview.src = reader.result;
+                preview.style.display = 'block';
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+    </script>
+</body>
+</html>

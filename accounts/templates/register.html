@@ -1,0 +1,157 @@
+{% load static %}
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Register</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="apple-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <link rel="stylesheet" href="{% static 'assets/css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/flag-icon.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/cs-skin-elastic.css' %}">
+    <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
+    <link rel="stylesheet" href="{% static 'assets/scss/style.css' %}">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+<script>  
+    $(document).ready(function(){  
+        $("#registerform").validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 4,
+               }, 
+               address: {
+                    required: true,
+                    minlength: 25,
+               }, 
+               state: {
+                    required: true,
+               }, 
+               city: {
+                    required: true,
+
+               }, 
+               pincode: {
+                    required: true,
+                    number: true,
+                    minlength: 6,
+                    maxlength: 6
+               },
+               mobile: {
+                    required: true,
+                    number: true,
+                    minlength: 10,
+                    maxlength: 10
+                }, 
+            },
+            messages: {
+                name: {
+                    required: "specify name",
+                    minlength: "The name field has to be minimum 4 characters long",
+                },
+                address: {
+                    required: "specify address",
+                    minlength: "The address field has to be minimum 25 characters long",
+                },
+                state: {
+                    required: "specify state",
+                },
+               city: {
+                    required: "specify city",
+                },
+                pincode: {
+                    required: "specify pincode",
+                    minlength: "The pincode field has to be minimum 6 characters long",
+                    maxlength: "The picode field has to be maximum 6 characters long"
+                },
+                mobile: {
+                    required: "specify number",
+                    minlength: "The mobile field has to be minimum 10 characters long",
+                    maxlength: "The mobile field has to be maximum 10 characters long"
+                },
+            }  
+        });
+    }); 
+</script>
+</head>
+<body>
+
+
+    <div class="sufee-login d-flex align-content-center flex-wrap">
+        <div class="container">
+            <div class="login-content">
+                <div class="login-form">
+                    <div class="login-logo">
+                        <h4>Register</h4>
+                    </div>
+                    <form method="post" action="/register/">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input type="name" name="name" class="form-control" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" class="form-control" placeholder="Email">
+                        </div>                        
+                        <div class="form-group">
+                            <input type="number" name="phone" class="form-control" placeholder="Phone">
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <input type="name" name="city" class="form-control" placeholder="City">
+                            </div>    
+                            <div class="col-md-6">    
+                                <input type="name" name="state" class="form-control" placeholder="State">
+                            </div><br><br>     
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" name="address" onfocus="clearTextarea(this)">Address</textarea>
+                        </div>                        
+                        <div class="form-group">
+                            <input type="password" name="password" class="form-control" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" id="role" name="role">
+                                <option>Select a Role</option>
+                                <option value="Distributor">Distributor</option>
+                                <option value="Retailer">Retailer</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Register</button>
+                        <div class="register-link m-t-15 text-center">
+                            <p>Already have account ? <a href="/login/"> Sign in</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="{% static 'assets/js/vendor/jquery-2.1.4.min.js' %}"></script>
+    <script src="{% static 'assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins.js' %}"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+<script>
+    function clearTextarea(element) {
+        if (element.value === 'Address') {
+            element.value = '';
+        }
+    }
+</script>
+
+</body>
+</html>
