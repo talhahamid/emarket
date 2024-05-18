@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-5f-ium7!7bhom=8%*%sr42^k&)n@4nvoam!_edqb42^2*cd2h(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['emarket-43z2.onrender.com','localhost']
+ALLOWED_HOSTS = ['emarket-konz.onrender.com','localhost']
 
 
 # Application definition
